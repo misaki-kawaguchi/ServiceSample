@@ -53,4 +53,20 @@ class SoundManageService : Service() {
         // 定数を返す
         return Service.START_NOT_STICKY
     }
+
+    // アクティビティ終了時の処理
+    override fun onDestroy() {
+        // フィールドのプレーヤーがnullじゃなかったら
+        _player?.let {
+            // プレーヤーが再生中の場合
+            if(it.isPlaying) {
+                // プレーヤーの停止
+                it.stop()
+            }
+            // プレーヤーの解放
+            it.release()
+            // プレーヤー用フィールドをnullに
+            _player = null
+        }
+    }
 }
