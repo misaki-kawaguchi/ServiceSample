@@ -69,4 +69,12 @@ class SoundManageService : Service() {
             _player = null
         }
     }
+
+    // メディア再生準備が完了時のリスナクラス
+    private inner class PlayerPreparedListener : MediaPlayer.OnPreparedListener {
+        override fun onPrepared(mp: MediaPlayer) {
+            // メディアを再生
+            mp.start()
+        }
+    }
 }
