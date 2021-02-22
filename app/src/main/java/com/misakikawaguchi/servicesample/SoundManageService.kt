@@ -1,6 +1,9 @@
 package com.misakikawaguchi.servicesample
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
@@ -16,6 +19,19 @@ class SoundManageService : Service() {
     override fun onCreate() {
         // フィールドのメディアプレーヤーオブジェクトを生成
         _player = MediaPlayer()
+
+        // 通知チャネルのID文字列を用意
+        val id = "soundmanagerservice_notification_channel"
+        // 通知チャネル名をstrings.xmlから取得
+        val name = getString(R.string.notification_channel_name)
+        // 通知チャネルの重要度を標準に設定
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        // 通知チャネルを生成
+        val channel = NotificationChannel(id, name, importance)
+        // NotificationManagerオブジェクトを取得
+        val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        // 通知チャネルを設定
+        manager.createNotificationChannel(channel)
     }
 
     override fun onBind(intent: Intent): IBinder {
