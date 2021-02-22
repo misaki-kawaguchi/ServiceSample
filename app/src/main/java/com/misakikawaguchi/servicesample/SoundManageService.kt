@@ -26,5 +26,10 @@ class SoundManageService : Service() {
         val mediaFileUriStr = "android.resource://${packageName}/${R.raw.mountain_stream}"
         // 音声ファイルのURI文字列を元にURIオブジェクトを生成
         val mediaFileUri = Uri.parse(mediaFileUriStr)
+
+        try {
+            // メディアプレーヤーに音声ファイルを指定
+            _player?.setDataSource(applicationContext, mediaFileUri)
+        }
     }
 }
