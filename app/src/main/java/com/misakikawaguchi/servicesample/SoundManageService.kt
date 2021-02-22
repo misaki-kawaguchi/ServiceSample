@@ -30,6 +30,11 @@ class SoundManageService : Service() {
         try {
             // メディアプレーヤーに音声ファイルを指定
             _player?.setDataSource(applicationContext, mediaFileUri)
+
+            // 非同期でメディア再生準備が完了した際のリスナを設定
+            _player?.setOnPreparedListener(PlayerPreparedListener())
+            // メディア再生が終了した際のリスナを設定
+            _player?.setOnCompletionListener(PlayerCompletionListener())
         }
     }
 }
