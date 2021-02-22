@@ -77,4 +77,11 @@ class SoundManageService : Service() {
             mp.start()
         }
     }
+
+    // メディア再生が終了した時のリスナクラス
+    private inner class PlayerCompletionListener : MediaPlayer.OnCompletionListener {
+        override fun onCompletion(mp: MediaPlayer) {
+            // 自分自身を終了
+        }
+    }
 }
