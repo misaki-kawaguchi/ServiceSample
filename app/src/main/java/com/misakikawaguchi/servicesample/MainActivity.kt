@@ -25,4 +25,18 @@ class MainActivity : AppCompatActivity() {
         btPlay.isEnabled = false
         btStop.isEnabled = true
     }
+
+    // 停止ボタンをタップした時の処理
+    fun onStopButtonClick(view: View) {
+        // インテントオブジェクトを生成
+        val intent = Intent(applicationContext, SoundManageService::class.java)
+        // サービスを停止
+        stopService(intent)
+
+        // 再生ボタンをタップ可能に、停止ボタンをタップ不可にする
+        val btPlay = findViewById<Button>(R.id.btPlay)
+        val btStop = findViewById<Button>(R.id.btStop)
+        btPlay.isEnabled = true
+        btStop.isEnabled = false
+    }
 }
