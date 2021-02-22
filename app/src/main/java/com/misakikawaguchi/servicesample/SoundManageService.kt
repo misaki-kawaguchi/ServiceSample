@@ -41,5 +41,13 @@ class SoundManageService : Service() {
             // 非同期でメディア再生を準備
             _player.prepareAsync()
         }
+
+        // 例外発生時の処理
+        catch (ex: IllegalAccessException) {
+            Log.e("ServiceSample", "メディアプレーヤー準備時の例外発生", ex)
+        }
+        catch (ex: IOException) {
+            Log.e("ServiceSample", "メディアプレーヤー準備時の例外発生", ex)
+        }
     }
 }
