@@ -39,7 +39,7 @@ class SoundManageService : Service() {
             _player?.setOnCompletionListener(PlayerCompletionListener())
 
             // 非同期でメディア再生を準備
-            _player.prepareAsync()
+            _player?.prepareAsync()
         }
 
         // 例外発生時の処理
