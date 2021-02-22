@@ -9,6 +9,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.IBinder
 import android.util.Log
+import androidx.core.app.NotificationCompat
 import java.io.IOException
 
 class SoundManageService : Service() {
@@ -97,6 +98,23 @@ class SoundManageService : Service() {
     // メディア再生が終了した時のリスナクラス
     private inner class PlayerCompletionListener : MediaPlayer.OnCompletionListener {
         override fun onCompletion(mp: MediaPlayer) {
+            // Notificationを作成するBuilderクラスを生成
+            val builder = NotificationCompat.Builder(applicationContext, "soundmanagerservice_notification_channel")
+
+            // 通知エリアに表示されるアイコンを設定
+            builder.setSmallIcon(android.R.drawable.ic_dialog_info)
+            // 通知ドロワーでの表示タイトルを設定
+            builder.setContentTitle(getString(R.string.msg_notification_title_finish))
+            // 通知ドロワーでの表示メッセージを設定
+            builder.setContentText(getString(R.string.msg_notification_text_finish))
+
+            // BuilderからNotificationオブジェクトを生成
+            val notification = builder.build()
+            // NotificationManagerオブジェクトを取得
+            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            // 通知
+            manager.notify(0, notification)
+
             // 自分自身を終了
             stopSelf()
         }
