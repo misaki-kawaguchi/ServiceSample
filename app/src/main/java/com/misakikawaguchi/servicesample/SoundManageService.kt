@@ -5,6 +5,8 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.IBinder
+import android.util.Log
+import java.io.IOException
 
 class SoundManageService : Service() {
 
@@ -35,6 +37,9 @@ class SoundManageService : Service() {
             _player?.setOnPreparedListener(PlayerPreparedListener())
             // メディア再生が終了した際のリスナを設定
             _player?.setOnCompletionListener(PlayerCompletionListener())
+
+            // 非同期でメディア再生を準備
+            _player.prepareAsync()
         }
     }
 }
