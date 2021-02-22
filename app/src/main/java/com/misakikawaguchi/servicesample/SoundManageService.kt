@@ -49,5 +49,8 @@ class SoundManageService : Service() {
         catch (ex: IOException) {
             Log.e("ServiceSample", "メディアプレーヤー準備時の例外発生", ex)
         }
+
+        // 定数を返す
+        return Service.START_NOT_STICKY
     }
 }
